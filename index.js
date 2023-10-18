@@ -248,17 +248,26 @@ async function run() {
             res.send(result);
         })
 
+        ///getting specific brand products
+        app.get('/brandproducts/:type', async (req, res) => {
+          const type = req.params.type;
+          const query = { brand: type }
+          const result = await ProductCollection.find(query);
+          const Brandproducts = await result.toArray();
+          res.send(Brandproducts);
+      })
+
         ///adding all products 
 
-        app.get('/addallproduct', async (req, res) => {
-            const newProduct = products;
-            console.log(newProduct);
-            const options = { ordered: true };
-            const result = await ProductCollection.insertMany(newProduct, options);
-            if(result)
-            console.log(" added succesfully");
-            res.send(result);
-        })
+        // app.get('/addallproduct', async (req, res) => {
+        //     const newProduct = products;
+        //     console.log(newProduct);
+        //     const options = { ordered: true };
+        //     const result = await ProductCollection.insertMany(newProduct, options);
+        //     if(result)
+        //     console.log(" added succesfully");
+        //     res.send(result);
+        // })
 
        
        
